@@ -23,10 +23,7 @@ new Vue({
   router,
   components: {
     App
-    // TodoHeader,
-    // TodoInput,
-    // TodoList,
-    // TodoFooter
   },
+  template: '<app/>',
   vuetify
 })
