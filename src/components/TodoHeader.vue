@@ -1,7 +1,7 @@
 <template>
-  <haeder>
+  <header>
     To Do List!
-  </haeder>
+  </header>
 </template>
 
 <script>
