@@ -9,24 +9,23 @@
 </template>
 
 <script>
-import TodoHeader from './components/TodoHeader.vue';
-import TodoContent from './components/TodoContent.vue';
-import TodoFooter from './components/TodoFooter.vue';
+import TodoHeader from "./components/TodoHeader.vue";
+import TodoContent from "./components/TodoContent.vue";
+import TodoFooter from "./components/TodoFooter.vue";
 
 export default {
   data: function() {
     return {
-      str: 'Header'
-    }
+      str: "Header"
+    };
   },
-components: {
-  'todo-header': TodoHeader,
-  'todo-content': TodoContent,
-  'todo-footer': TodoFooter,
-}
-}
+  components: {
+    "todo-header": TodoHeader,
+    "todo-content": TodoContent,
+    "todo-footer": TodoFooter
+  }
+};
 </script>
 
 <style>
-
 </style>
