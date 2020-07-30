@@ -1,15 +1,17 @@
 <template>
-    <header>
-        <h1>Header</h1>
-    </header>
+  <header>
+    <center>
+      <h1 class="title">Todo List</h1>
+    </center>
+  </header>
 </template>
 
 <script>
-export default {
-    
-}
 </script>
 
 <style>
-
+.title {
+  color: green;
+  padding: 10px;
+}
 </style>
