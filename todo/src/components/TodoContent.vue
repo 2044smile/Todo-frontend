@@ -6,18 +6,17 @@
           <h3 class="subject">what is your plan?</h3>
         </v-flex>
         <v-flex column>
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <v-text-field v-model="title" :counter="64" :rules="titleRules" label="Title" required></v-text-field>
+          <v-form v-on:submit="submitForm">
+            <v-text-field v-model="title" :counter="64" label="Title" required></v-text-field>
             <v-text-field
               v-model="content"
               :counter="255"
-              :rules="contentRules"
               label="Content"
               required
             ></v-text-field>
 
-            <v-btn @click="create" style="background: green">create</v-btn>
-            <v-btn @click="clear" style="background: red">clear</v-btn>
+            <v-btn @click="create" type="submit" style="background: green">create</v-btn>
+            <v-btn @click="clear" type="submit" style="background: red">clear</v-btn>
           </v-form>
         </v-flex>
 
@@ -37,7 +36,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+
+};
 </script>
 
 <style>
