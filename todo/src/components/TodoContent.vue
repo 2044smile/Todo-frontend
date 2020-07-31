@@ -8,12 +8,7 @@
         <v-flex column>
           <v-form v-on:submit="submitForm">
             <v-text-field v-model="title" :counter="64" label="Title" required></v-text-field>
-            <v-text-field
-              v-model="content"
-              :counter="255"
-              label="Content"
-              required
-            ></v-text-field>
+            <v-text-field v-model="content" :counter="255" label="Content" required></v-text-field>
 
             <v-btn @click="create" type="submit" style="background: green">create</v-btn>
             <v-btn @click="clear" type="submit" style="background: red">clear</v-btn>
@@ -22,10 +17,10 @@
 
         <v-flex class="todoList" column>
           <v-card max-width="600" tile>
-            <v-list-item>
+            <v-list-item v-for="(data, index) in propsdata" v-bind:key="index">
               <v-list-item-content>
-                <v-list-item-title>Title</v-list-item-title>
-                <v-list-item-subtitle>content</v-list-item-subtitle>
+                <v-list-item-title>{{ data.title }}</v-list-item-title>
+                <v-list-item-subtitle>{{ data.description }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-card>
@@ -37,7 +32,12 @@
 
 <script>
 export default {
-
+  props: ["propsdata"],
+  methods: {
+      clearForm: function() {
+          
+      }
+  }
 };
 </script>
 
@@ -49,6 +49,6 @@ export default {
   text-align: center;
 }
 .todoList {
-    margin: 30px 0px 30px 0px;
+  margin: 30px 0px 30px 0px;
 }
 </style>
