@@ -12,12 +12,12 @@ import TodoHeader from "./components/TodoHeader.vue";
 import TodoContent from "./components/TodoContent.vue";
 import TodoFooter from "./components/TodoFooter.vue";
 
-let url = "http://localhost:8000/api/todo";  // drf server addr
+let url = "http://localhost:8000/api/todo/";  // drf server addr
 
 export default {
   data: () => {
     return {
-      todoList: []
+      todoList: [],
     };
   },
   components: {
@@ -39,7 +39,6 @@ export default {
   },
   methods: {  // CRUD 로직이 들어갈 부분
     getTodoList: function() {},
-    createTodoList: function() {},
     updateTodoList: function() {},
     deleteTodoList: function() {}
   }
