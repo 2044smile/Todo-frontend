@@ -18,7 +18,7 @@
             </v-col>
           </v-row>
           <v-row justify="center">
-            <v-date-picker v-model="picker"></v-date-picker>
+            <v-date-picker v-model="data.due_date"></v-date-picker>
           </v-row>
           <v-btn @click="sendForm" style="background: green">create</v-btn>
           <v-btn @click="clearForm" style="background: red">clear</v-btn>
@@ -49,14 +49,14 @@ export default {
         title: "",
         author: "",
         description: "",
-        due_date: ""
+        due_date: new Date().toISOString().substr(0, 10),
       },
-      picker: new Date().toISOString().substr(0, 10)
     };
   },
   props: ["propsdata"],
   methods: {
     sendForm: function() {
+      console.log('===Debug===', this.data)
       axios({
         method: "POST",
         url: url,
@@ -65,8 +65,8 @@ export default {
         .then(response => {
           console.log("Success", response)
         })
-        .catch(response => {
-          console.log("Failed to create todoList", response);
+        .catch((error) => {
+          console.log("Failed to create todoList", error.response);
         });
     },
     clearForm: function() {
