@@ -32,9 +32,10 @@ export default {
     })
       .then(response => {
         this.todoList = response.data;
+        console.log("Success", response)
       })
-      .catch(response => {
-        console.log("Failed to get todoList", response.data);
+      .catch(error => {
+        console.log("Failed to get todoList", error.response);
       });
   },
   methods: {  // CRUD 로직이 들어갈 부분
