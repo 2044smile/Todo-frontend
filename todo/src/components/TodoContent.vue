@@ -60,10 +60,11 @@ export default {
       axios({
         method: "POST",
         url: url,
-        data: this.data // TODO: DatePicker 를 고치고 수정이 필요함
+        data: this.data
       })
         .then(response => {
           console.log("Success", response)
+          this.$emit('saved')
         })
         .catch((error) => {
           console.log("Failed to create todoList", error.response);
