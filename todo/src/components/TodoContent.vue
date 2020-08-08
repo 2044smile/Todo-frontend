@@ -17,9 +17,27 @@
               <v-text-field v-model="data.description" :counter="255" label="Content" required></v-text-field>
             </v-col>
           </v-row>
-          <v-row justify="center">
-            <v-date-picker v-model="data.due_date"></v-date-picker>
-          </v-row>
+            <v-menu
+              v-model="showPicker"
+              :close-on-content-click="false" 
+              transition="scale-transition"
+              offset-y
+              max-width="500px"
+              min-width="500px"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="data.due_date"
+                  label="Due Date"
+                  hint="YYYY-MM-DD"
+                  persistent-hint
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+                <v-date-picker v-model="data.due_date" no-title @input="showPicker = false"></v-date-picker>
+              </template>
+            </v-menu>
+            <!-- <v-date-picker v-model="data.due_date" locale="ko" no-title></v-date-picker> -->
           <v-btn @click="sendForm" style="background: green">create</v-btn>
           <v-btn @click="clearForm" style="background: red">clear</v-btn>
         </v-flex>
@@ -29,6 +47,8 @@
               <v-list-item-content>
                 <v-list-item-title>{{ data.title }}</v-list-item-title>
                 <v-list-item-subtitle>{{ data.description }}</v-list-item-subtitle>
+                <v-btn>Update</v-btn>
+                <v-btn>Delete</v-btn>
               </v-list-item-content>
             </v-list-item>
           </v-card>
@@ -45,6 +65,7 @@ let url = "http://localhost:8000/api/todo/";
 export default {
   data: () => {
     return {
+      showPicker: false,
       data: {
         title: "",
         author: "",
@@ -56,24 +77,24 @@ export default {
   props: ["propsdata"],
   methods: {
     sendForm: function() {
-      console.log('===Debug===', this.data)
+      console.log("===Debug===", this.data);
       axios({
         method: "POST",
         url: url,
         data: this.data
       })
         .then(response => {
-          console.log("Success", response)
-          this.$emit('saved')
+          console.log("Success", response);
+          this.$emit("saved");
         })
-        .catch((error) => {
+        .catch(error => {
           console.log("Failed to create todoList", error.response);
         });
     },
     clearForm: function() {
-        this.data.title = '',
-        this.data.description = '',
-        this.data.author = ''
+      (this.data.title = ""),
+        (this.data.description = ""),
+        (this.data.author = "");
     }
   }
 };
