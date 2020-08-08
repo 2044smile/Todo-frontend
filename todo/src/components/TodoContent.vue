@@ -93,8 +93,9 @@ export default {
     },
     clearForm: function() {
       (this.data.title = ""),
-        (this.data.description = ""),
-        (this.data.author = "");
+      (this.data.description = ""),
+      (this.data.author = ""),
+      (this.data.due_date = "")
     }
   }
 };
