@@ -38,8 +38,8 @@
               </template>
             </v-menu>
             <!-- <v-date-picker v-model="data.due_date" locale="ko" no-title></v-date-picker> -->
-          <v-btn @click="sendForm" style="background: green">create</v-btn>
-          <v-btn @click="clearForm" style="background: red">clear</v-btn>
+          <v-btn @click="sendForm" color="#4CAF50">create</v-btn>
+          <v-btn @click="clearForm" color="#F44336">clear</v-btn>
         </v-flex>
         <v-flex class="todoList" column>
           <v-card max-width="600" tile>
@@ -47,8 +47,8 @@
               <v-list-item-content>
                 <v-list-item-title>{{ data.title }}</v-list-item-title>
                 <v-list-item-subtitle>{{ data.description }}</v-list-item-subtitle>
-                <v-btn>Update</v-btn>
-                <v-btn>Delete</v-btn>
+                <v-btn color="#FFCA28">Update</v-btn>
+                <v-btn color="#F44336">Delete</v-btn>
               </v-list-item-content>
             </v-list-item>
           </v-card>
