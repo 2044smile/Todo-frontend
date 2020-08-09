@@ -47,9 +47,8 @@
               <v-list-item-content>
                 <v-list-item-title>{{ data.title }}</v-list-item-title>
                 <v-list-item-subtitle>{{ data.description }}</v-list-item-subtitle>
-                <v-btn color="#FFCA28">Update</v-btn>
-                <v-btn color="#F44336">Delete</v-btn>
               </v-list-item-content>
+              <v-btn class="ma-2" @click="deleteTodo(data.id)" color="#F44336">Delete</v-btn>
             </v-list-item>
           </v-card>
         </v-flex>
@@ -67,6 +66,7 @@ export default {
     return {
       showPicker: false,
       data: {
+        id: "",
         title: "",
         author: "",
         description: "",
@@ -77,7 +77,6 @@ export default {
   props: ["propsdata"],
   methods: {
     sendForm: function() {
-      console.log("===Debug===", this.data);
       axios({
         method: "POST",
         url: url,
@@ -96,6 +95,19 @@ export default {
       (this.data.description = ""),
       (this.data.author = ""),
       (this.data.due_date = "")
+    },
+    deleteTodo: function(id) {
+      axios({
+        method: "DELETE",
+        url: url + id,
+      })
+        .then(response => {
+          this.$emit("deleted");
+          console.log("Success", response);
+        })
+        .catch(error => {
+          console.log("Failed to get todoList", error.response);
+        });
     }
   }
 };

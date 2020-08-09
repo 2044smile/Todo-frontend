@@ -1,7 +1,10 @@
 <template>
   <div>
     <todo-header></todo-header>
-    <todo-content v-bind:propsdata="todoList" v-on:saved="getTodoList"></todo-content>
+    <todo-content 
+    v-bind:propsdata="todoList" 
+    v-on:saved="getTodoList" 
+    v-on:deleted="getTodoList"></todo-content>
     <!-- v-bind:하위컴포넌트 속성명="상위 컴포넌트 전달할 데이터명"  -->
     <!-- v-on:하위컴포넌트 이벤트 전달 속성명="상위 컴포넌트 메소드명"  -->
     <todo-footer></todo-footer>
@@ -56,7 +59,6 @@ export default {
         });
     },
     updateTodoList: function() {},
-    deleteTodoList: function() {}
   }
 };
 </script>
