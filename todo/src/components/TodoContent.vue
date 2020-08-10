@@ -34,7 +34,7 @@
                   readonly
                   v-on="on"
                 ></v-text-field>
-                <v-date-picker v-model="data.due_date" no-title @input="showPicker = false"></v-date-picker>
+                <v-date-picker style="background-color:black" v-model="data.due_date" @input="showPicker = false"></v-date-picker>
               </template>
             </v-menu>
             <!-- <v-date-picker v-model="data.due_date" locale="ko" no-title></v-date-picker> -->
