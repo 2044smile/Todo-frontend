@@ -54,18 +54,25 @@
                 <v-list-item-title>{{ data.title }}</v-list-item-title>
                 <v-list-item-title>{{ data.author }}</v-list-item-title>
                 <v-list-item-title>{{ data.due_date }}</v-list-item-title>
-                <v-list-item-subtitle>{{ data.description }} >> {{ data.is_hidden }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ data.description }}</v-list-item-subtitle>
               </v-list-item-content>
               <v-form v-show="data.is_hidden">
                 <v-container>
                   <v-row>
-                    <v-col cols="9" md="1.5">
+                    <v-col cols="12" md="6">
                       <v-text-field v-model="data.title" :counter="64" label="Title" required></v-text-field>
                     </v-col>
-                    <v-col cols="9" md="1.5">
+                    <v-col cols="12" md="3">
                       <v-text-field v-model="data.author" :counter="32" label="Author" disabled></v-text-field>
                     </v-col>
-                    <v-col cols="12" md="4">
+                    <v-col cols="12" md="3">
+                      <v-text-field
+                        v-model="data.due_date"
+                        label="Due Date"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="10">
                       <v-text-field
                         v-model="data.description"
                         :counter="500"
@@ -74,14 +81,6 @@
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="2">
-                      <v-text-field
-                        v-model="data.due_date"
-                        :counter="500"
-                        label="Due Date"
-                        required
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="1">
                     <v-checkbox
                       v-model="data.completed"
                       color="#2962FF"
@@ -89,12 +88,15 @@
                       required
                     ></v-checkbox>
                     </v-col>
+                    <v-col cols="12" md="4">
+                      <v-btn class="ma-2" @click="data.is_hidden = !data.is_hidden ; updateTodo(data)" v-show="data.is_hidden" color="#4CAF50">Save</v-btn>
+                      <v-btn class="ma-2" @click="deleteTodo(data.id)" color="#F44336">Delete</v-btn>
+                    </v-col>
                   </v-row>
                 </v-container>
               </v-form>
               <v-btn class="ma-2" @click="data.is_hidden = !data.is_hidden" v-show="!data.is_hidden" color="#F9A825">Update</v-btn>
-              <v-btn class="ma-2" @click="data.is_hidden = !data.is_hidden ; updateTodo(data)" v-show="data.is_hidden" color="#4CAF50">Save</v-btn>
-              <v-btn class="ma-2" @click="deleteTodo(data.id)" color="#F44336">Delete</v-btn>
+              <v-btn class="ma-2" @click="deleteTodo(data.id)" v-show="!data.is_hidden" color="#F44336">Delete</v-btn>
             </v-list-item>
           </v-card>
         </v-flex>
