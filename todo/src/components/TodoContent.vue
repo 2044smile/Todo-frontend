@@ -48,13 +48,52 @@
           <v-btn @click="clearForm" color="#F44336">clear</v-btn>
         </v-flex>
         <v-flex class="todoList" column>
-          <v-card max-width="600" tile>
+          <v-card fluid>
             <v-list-item v-for="(data, index) in propsdata" v-bind:key="index">
-              <v-list-item-content>
+              <v-list-item-content v-show="!data.is_hidden">
                 <v-list-item-title>{{ data.title }}</v-list-item-title>
-                <v-list-item-subtitle>{{ data.description }}</v-list-item-subtitle>
+                <v-list-item-title>{{ data.author }}</v-list-item-title>
+                <v-list-item-title>{{ data.due_date }}</v-list-item-title>
+                <v-list-item-subtitle>{{ data.description }} >> {{ data.is_hidden }}</v-list-item-subtitle>
               </v-list-item-content>
-              <v-btn class="ma-2" @click="updateTodo(data)" color="#F9A825">Update</v-btn>
+              <v-form v-show="data.is_hidden">
+                <v-container>
+                  <v-row>
+                    <v-col cols="9" md="1.5">
+                      <v-text-field v-model="data.title" :counter="64" label="Title" required></v-text-field>
+                    </v-col>
+                    <v-col cols="9" md="1.5">
+                      <v-text-field v-model="data.author" :counter="32" label="Author" disabled></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <v-text-field
+                        v-model="data.description"
+                        :counter="500"
+                        label="Description"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="2">
+                      <v-text-field
+                        v-model="data.due_date"
+                        :counter="500"
+                        label="Due Date"
+                        required
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="1">
+                    <v-checkbox
+                      v-model="data.completed"
+                      color="#2962FF"
+                      label="Completed"
+                      required
+                    ></v-checkbox>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-form>
+              <v-btn class="ma-2" @click="data.is_hidden = !data.is_hidden" v-show="!data.is_hidden" color="#F9A825">Update</v-btn>
+              <v-btn class="ma-2" @click="data.is_hidden = !data.is_hidden ; updateTodo(data)" v-show="data.is_hidden" color="#4CAF50">Save</v-btn>
               <v-btn class="ma-2" @click="deleteTodo(data.id)" color="#F44336">Delete</v-btn>
             </v-list-item>
           </v-card>
@@ -71,6 +110,7 @@ let url = "http://localhost:8000/api/todo/";
 export default {
   data: () => {
     return {
+      updateHidden: false,
       showPicker: false,
       data: {
         id: "",
@@ -98,7 +138,7 @@ export default {
         });
     },
     clearForm: function() {
-        (this.data.title = ""),
+      (this.data.title = ""),
         (this.data.description = ""),
         (this.data.author = ""),
         (this.data.due_date = "");
@@ -119,7 +159,7 @@ export default {
     updateTodo: function(data) {
       axios({
         method: "PATCH",
-        url: url + data.id
+        url: url + data.id + "/"
       })
         .then(response => {
           this.$emit("patched");
