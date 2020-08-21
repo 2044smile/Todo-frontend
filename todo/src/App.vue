@@ -37,6 +37,9 @@ export default {
       url: url
     })
       .then(response => {
+        for (var index in response.data) {
+          response.data[index].is_hidden = false
+        }
         this.todoList = response.data;
         console.log("Success", response);
       })
