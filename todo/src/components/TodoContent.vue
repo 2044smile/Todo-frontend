@@ -98,7 +98,7 @@
                   </v-row>
                 </v-container>
               </v-form>
-              <v-btn class="ma-2" @click="data.is_hidden = !data.is_hidden ; onlyOne(data, propsdata)" v-show="!data.is_hidden" color="#F9A825">Update</v-btn>
+              <v-btn class="ma-2" @click="data.is_hidden = !data.hidden ; onlyOne(data, propsdata)" v-show="!data.is_hidden" color="#F9A825">Update</v-btn>
               <v-btn class="ma-2" @click="deleteTodo(data.id)" v-show="!data.is_hidden" color="#F44336">Delete</v-btn>
             </v-list-item>
           </v-card>
@@ -176,9 +176,12 @@ export default {
         });
     },
     onlyOne: function(data, propsdata) {
-      for (var index in propsdata) {
-        (propsdata[index].is_hidden === true & propsdata[index].id != data.id) ? propsdata[index].is_hidden = false : ''
-      }
+      console.log('data : ', data);
+      console.log('propsdata : ', propsdata);
+      
+      // for (var index in propsdata) {
+        // (propsdata[index].is_hidden === true & propsdata[index].id != data.id) ? propsdata[index].is_hidden = false : ''
+      // }
     }
   }
 };
