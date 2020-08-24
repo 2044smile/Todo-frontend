@@ -54,9 +54,6 @@
                 <v-list-item-title>{{ data.title }}</v-list-item-title>
                 <v-list-item-title>{{ data.author }}</v-list-item-title>
                 <v-list-item-title>{{ data.due_date }}</v-list-item-title>
-                <v-list-item-icon>
-                  <v-icon>done</v-icon>
-                </v-list-item-icon>
                 <v-list-item-subtitle>{{ data.description }}</v-list-item-subtitle>
               </v-list-item-content>
               <v-form v-show="data.is_hidden">
@@ -98,7 +95,7 @@
                   </v-row>
                 </v-container>
               </v-form>
-              <v-btn class="ma-2" @click="data.is_hidden = !data.hidden ; onlyOne(data, propsdata)" v-show="!data.is_hidden" color="#F9A825">Update</v-btn>
+              <v-btn class="ma-2" @click="data.is_hidden = !data.is_hidden" v-show="!data.is_hidden" color="#F9A825">Update</v-btn>
               <v-btn class="ma-2" @click="deleteTodo(data.id)" v-show="!data.is_hidden" color="#F44336">Delete</v-btn>
             </v-list-item>
           </v-card>
@@ -111,7 +108,6 @@
 <script>
 import axios from "axios";
 let url = "http://localhost:8000/api/todo/";
-
 export default {
   data: () => {
     return {
@@ -165,7 +161,7 @@ export default {
       axios({
         method: "PATCH",
         url: url + data.id + "/",
-        data: data,
+        data: data
       })
         .then(response => {
           this.$emit("patched");
@@ -174,14 +170,6 @@ export default {
         .catch(error => {
           console.log("Failed to patched todoList", error.response);
         });
-    },
-    onlyOne: function(data, propsdata) {
-      console.log('data : ', data);
-      console.log('propsdata : ', propsdata);
-      
-      // for (var index in propsdata) {
-        // (propsdata[index].is_hidden === true & propsdata[index].id != data.id) ? propsdata[index].is_hidden = false : ''
-      // }
     }
   }
 };
