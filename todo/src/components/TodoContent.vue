@@ -95,7 +95,7 @@
                   </v-row>
                 </v-container>
               </v-form>
-              <v-btn class="ma-2" @click="data.is_hidden = !data.is_hidden" v-show="!data.is_hidden" color="#F9A825">Update</v-btn>
+              <v-btn class="ma-2" @click="data.is_hidden = !data.is_hidden ; onlyTodoListCard(data, propsdata)" v-show="!data.is_hidden" color="#F9A825">Update</v-btn>
               <v-btn class="ma-2" @click="deleteTodo(data.id)" v-show="!data.is_hidden" color="#F44336">Delete</v-btn>
             </v-list-item>
           </v-card>
@@ -170,8 +170,15 @@ export default {
           console.log("Failed to patched todoList", error.response);
         });
     },
-    onlyTodoListCard: function() {
-      
+    onlyTodoListCard: function(data, propsdata) {
+      console.log(`This is data: ${data}`);
+      console.log(`This is propsdata: ${propsdata}`);
+      for (var index in propsdata) {
+        (data.id != propsdata[index].id) ? propsdata[index].is_hidden = false : ''
+        // if (data.id != propsdata[index].id) {
+          // propsdata[index].is_hidden = false
+        // }
+      }
     }
   }
 };
