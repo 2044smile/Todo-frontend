@@ -111,7 +111,6 @@ let url = "http://localhost:8000/api/todo/";
 export default {
   data: () => {
     return {
-      updateHidden: false,
       showPicker: false,
       data: {
         id: "",
@@ -139,7 +138,7 @@ export default {
         });
     },
     clearForm: function() {
-      (this.data.title = ""),
+        (this.data.title = ""),
         (this.data.description = ""),
         (this.data.author = ""),
         (this.data.due_date = "");
@@ -170,6 +169,9 @@ export default {
         .catch(error => {
           console.log("Failed to patched todoList", error.response);
         });
+    },
+    onlyTodoListCard: function() {
+      
     }
   }
 };
