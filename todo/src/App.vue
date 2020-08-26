@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <todo-header></todo-header>
     <todo-content v-bind:propsdata="todoList" v-on:saved="getTodoList" v-on:deleted="getTodoList"></todo-content>
     <!-- v-bind:하위컴포넌트 속성명="상위 컴포넌트 전달할 데이터명"  -->
@@ -65,4 +65,8 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+#app {
+  font-family: 'Do Hyeon', sans-serif;
+}
 </style>
