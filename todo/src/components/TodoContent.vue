@@ -51,10 +51,16 @@
           <v-card fluid>
             <v-list-item v-for="(data, index) in propsdata" v-bind:key="index">
               <v-list-item-content v-show="!data.is_hidden">  <!-- Not 연산을 수행하기 때문에 !data.is_hidden = true 로 화면에 보이게 됩니다 -->
-                <v-list-item-title>{{ data.title }}</v-list-item-title>
-                <v-list-item-title>{{ data.author }}</v-list-item-title>
-                <v-list-item-title>{{ data.due_date }}</v-list-item-title>
-                <v-list-item-subtitle>{{ data.description }}</v-list-item-subtitle>
+                <v-list-item-title>Title: {{ data.title }}</v-list-item-title>
+                <v-list-item-title>Author: {{ data.author }}</v-list-item-title>
+                <v-list-item-title>Due Date: {{ data.due_date }}</v-list-item-title>
+                <v-list-item-title>Content: {{ data.description }}</v-list-item-title>
+                <v-list-item-title v-show="data.completed">
+                  <font-awesome-icon class="fa-2x" icon="calendar-check" />
+                </v-list-item-title>
+                <v-list-item-title v-show="!data.completed">
+                  <font-awesome-icon class="fa-2x" icon="calendar" />
+                </v-list-item-title>
               </v-list-item-content>
               <v-form v-show="data.is_hidden"> <!-- is_hidden=true 가 되면 입력할 수 있는 form 이 보여집니다. -->
                 <v-container>
@@ -109,6 +115,7 @@
   </div>
 </template>
 
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 <script>
 import axios from "axios";
 let url = "http://localhost:8000/api/todo/";
