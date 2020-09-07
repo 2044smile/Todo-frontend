@@ -1,6 +1,7 @@
 import Vue from 'vue'
+import { store } from './store/store'
 import App from './App.vue'
-import vuetify from './plugins/vuetify';
+import vuetify from './plugins/vuetify'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -16,6 +17,7 @@ Vue.config.productionTip = false
 
 
 new Vue({
-  vuetify,
+  el: '#app',
+  store, vuetify,
   render: h => h(App)
 }).$mount('#app')
