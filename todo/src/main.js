@@ -20,4 +20,4 @@ new Vue({
   el: '#app',
   store, vuetify,
   render: h => h(App)
-}).$mount('#app')
+})
