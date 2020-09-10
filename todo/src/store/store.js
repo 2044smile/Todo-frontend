@@ -6,28 +6,9 @@ let url = "http://localhost:8000/api/todo/";
 
 Vue.use(Vuex);
 
-const backend = {
-  fetch() {
-    axios({
-      method: "GET",
-      url: url,
-    })
-      .then((response) => {
-        for (var index in response.data) {
-          response.data[index].is_hidden = false;
-        }
-        this.$store.state.todoList = response.data;
-        console.log("Success", response);
-      })
-      .catch((error) => {
-        console.log("Failed to get todoList", error.response);
-      });
-  },
-};
-
 export const store = new Vuex.Store({
   state: {
-    todoList: backend.fetch(),
+    todoList: ''
   },
   getters: {
     storedTodoList(state) {
@@ -35,11 +16,34 @@ export const store = new Vuex.Store({
     },
   },
   mutations: {
-    successActions(state, payload) {
-      state.todoList.push = payload;
+    initTodoList(state, payload) {
+      state.todoList = payload
     },
+    createTodoList(state, payload) {
+      state.todoList.push(payload)
+    },
+    deleteTodoList(state, id) {
+      let index = state.todoList.findIndex(todoList => todoList.id == id)
+      state.todoList.splice(index, 1)
+    }
   },
   actions: {
+    initTodoList({ commit }) {
+      axios({
+        method: "GET",
+        url: url,
+      })
+        .then((response) => {
+          for (var index in response.data) {
+            response.data[index].is_hidden = false;
+          }
+          console.log("Success", response);
+          commit("initTodoList", response.data);
+        })
+        .catch((error) => {
+          console.log("Failed to get todoList", error);
+        });
+    },
     createTodoList({ commit }, payload) {
       axios({
         method: "POST",
@@ -48,23 +52,22 @@ export const store = new Vuex.Store({
       })
         .then((response) => {
           console.log("Success", response);
-          commit("successActions", response.data);
+          commit("createTodoList", response.data);
         })
         .catch((error) => {
           console.log("Failed to create todoList", error.response);
-        })
+        });
     },
     deleteTodoList({ commit }, payload) {
-      console.log('PayLoad : ', payload)
       axios({
         method: "DELETE",
-        url: url + payload.id
+        url: url + payload.id,
       })
-        .then(response => {
-          commit("successActions")
+        .then((response) => {
+          commit("deleteTodoList", payload.id);
           console.log("Success", response);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log("Failed to delete todoList", error.response);
         });
     },
@@ -72,15 +75,15 @@ export const store = new Vuex.Store({
       axios({
         method: "PATCH",
         url: url + payload.id + "/",
-        data: payload
+        data: payload,
       })
-        .then(response => {
+        .then((response) => {
           commit("successActions", response.data);
           console.log("Success", response);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log("Failed to patched todoList", error.response);
         });
-    }
+    },
   },
 });

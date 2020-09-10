@@ -168,6 +168,9 @@ export default {
       }
     }
   },
+  created() {
+    this.$store.dispatch('initTodoList')
+  },
   computed: {
     ...mapGetters(["storedTodoList"])
   },
