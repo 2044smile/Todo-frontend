@@ -120,7 +120,7 @@
     </v-container>
     <Modal v-if="showModal" @close="showModal = false">
       <h3 slot="header">
-        Success
+        Create!
         <font-awesome-icon class="fa closeModalBtn" icon="times" @click="showModal=false" />
       </h3>
       <div slot="body">투두리스트에 등록되었습니다.</div>
