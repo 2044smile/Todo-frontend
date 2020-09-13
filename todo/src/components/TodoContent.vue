@@ -152,7 +152,7 @@ export default {
     ...mapActions({
       sendForm: 'createTodoList',
       deleteTodo: 'deleteTodoList',
-      updateTodo: 'deleteTodoList',
+      updateTodo: 'updateTodoList',
     }),
     clearForm: function() {
         (this.data.title = ""),

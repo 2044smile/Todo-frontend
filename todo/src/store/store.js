@@ -25,6 +25,9 @@ export const store = new Vuex.Store({
     deleteTodoList(state, id) {
       let index = state.todoList.findIndex(todoList => todoList.id == id)
       state.todoList.splice(index, 1)
+    },
+    updateTodoList(state, payload) {
+      let index = state.todoList.findIndex(todoList => todoList.id == payload.id)
     }
   },
   actions: {
@@ -78,7 +81,7 @@ export const store = new Vuex.Store({
         data: payload,
       })
         .then((response) => {
-          commit("successActions", response.data);
+          commit("updateTodoList", payload);
           console.log("Success", response);
         })
         .catch((error) => {
