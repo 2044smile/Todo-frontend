@@ -43,7 +43,7 @@
               </template>
             </v-menu>
           </div>
-          <v-btn @click="sendForm({data})" color="#4CAF50">create</v-btn>
+          <v-btn @click="sendForm(data)" color="#4CAF50">create</v-btn>
           <v-btn @click="clearForm" color="#F44336">clear</v-btn>
         </v-flex>
         <v-flex class="todoList" column>
@@ -118,19 +118,18 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <Modal v-if="showModal" @close="showModal = false">
+    <Modal v-if="showModal" @close="showModal=false">
       <h3 slot="header">
-        !Create!
+        {{ modal.header }}
         <font-awesome-icon class="fa closeModalBtn" icon="times" @click="showModal=false" />
       </h3>
-      <div slot="body">투두리스트에 등록되었습니다.</div>
+      <div slot="body">{{ modal.body }}</div>
     </Modal>
   </div>
 </template>
 
 <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 <script>
-import axios from "axios";
 import Modal from "../common/Modal.vue";
 import { mapGetters, mapActions } from 'vuex'
 
@@ -139,6 +138,10 @@ export default {
     return {
       showPicker: false,
       showModal: false,
+      modal: {
+        header: "",
+        body: ""
+      },
       data: {
         id: "",
         title: "",
@@ -149,11 +152,23 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      sendForm: 'createTodoList',
-      deleteTodo: 'deleteTodoList',
-      updateTodo: 'updateTodoList',
-    }),
+    ...mapActions([
+      'createTodoList',
+      'deleteTodoList',
+      'updateTodoList',
+    ]),
+    sendForm: function(data) {
+      if (data.title === '') {
+        this.failModal();
+      } else {
+        this.createModal();
+        this.createTodoList({data});
+      }
+    },
+    deleteTodo: function(data) {
+      this.deleteModal();
+      this.deleteTodoList(data)
+    },
     clearForm: function() {
         (this.data.title = ""),
         (this.data.description = ""),
@@ -166,6 +181,21 @@ export default {
           ? (this.$store.state.todoList[index].is_hidden = false)
           : "";
       }
+    },
+    createModal() {
+      this.showModal = true
+      this.modal.header = "Success"
+      this.modal.body = "입력하신 투두리스트가 생성되었습니다."
+    },
+    failModal() {
+      this.showModal = true
+      this.modal.header = "Fail"
+      this.modal.body = "값을 입력해주세요."
+    },
+    deleteModal() {
+      this.showModal = true
+      this.modal.header = "Success"
+      this.modal.body = "선택한 투두리스트가 삭제되었습니다."
     }
   },
   created() {

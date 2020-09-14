@@ -55,7 +55,7 @@ export const store = new Vuex.Store({
         data: payload.data,
       })
         .then((response) => {
-          console.log("Success", response);
+          console.log("Create TodoList", response);
           commit("createTodoList", response.data);
         })
         .catch((error) => {
@@ -63,6 +63,7 @@ export const store = new Vuex.Store({
         });
     },
     deleteTodoList({ commit }, payload) {
+      console.log(payload.id)
       axios({
         method: "DELETE",
         url: url + payload.id,

@@ -21,8 +21,11 @@
   </transition>
 </template>
 
-<style>
+<script>
 
+</script>
+
+<style>
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -58,6 +61,7 @@
 
 .modal-body {
   margin: 20px 0;
+  font-size: 12px;
 }
 
 .modal-default-button {
