@@ -169,6 +169,10 @@ export default {
       this.deleteModal();
       this.deleteTodoList(data)
     },
+    updateTodo: function(data) {
+      this.updateModal();
+      this.updateTodoList(data)
+    },
     clearForm: function() {
         (this.data.title = ""),
         (this.data.description = ""),
@@ -196,7 +200,12 @@ export default {
       this.showModal = true
       this.modal.header = "Success"
       this.modal.body = "선택한 투두리스트가 삭제되었습니다."
-    }
+    },
+    updateModal() {
+      this.showModal = true
+      this.modal.header = "Success"
+      this.modal.body = "입력한 내용이 업데이트 되었습니다."
+    },
   },
   created() {
     this.$store.dispatch('initTodoList')
