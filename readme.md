@@ -1,9 +1,7 @@
 # TodoList
 
 ## Plan
-
-## Design
-
-- [vuetify transition TODO LIST](https://vuetifyjs.com/en/styles/transitions/)
-- Modal use v-slot
-- completed effect
+### I feel like resolving this
+- [vuex] unknown action type: initTodoList
+- [vuex] unknown getter: storedTodoList
+- [vuex] unknown action type: createTodoList
